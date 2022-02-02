@@ -18,3 +18,10 @@ https://iopscience.iop.org/article/10.3847/1538-3881/ab4da4
 If you don't want to install it, you can use it on Compute Canada clusters too.
 
 2. Look at, edit, and run `example-1.jl`
+
+
+<img height=350 src="https://user-images.githubusercontent.com/7330605/152241372-940fd1bd-1404-4ea1-aa15-1719bae48ea5.png"/>
+
+<br/>
+                                                                                                                         
+**Example of Figure 4 reproduced from the paper using this code**
