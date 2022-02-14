@@ -21,15 +21,16 @@ Pkg.instantiate()
 
 ## Activate environment and import packages
 cd(@__DIR__)
+using Pkg
 Pkg.activate(".")
 using DirectDetections, Distributions
 
 ## Create a 1-planet model
 @named b = Planet(
     Priors(
-        a = Uniform(1, 75),
+        a = TruncatedNormal(20, 10, 0, Inf),
         i = Sine(),
-        e = Uniform(0,  1),
+        e = Beta(1.5, 10),
         Ω = Uniform(0,  π),
         ω = Uniform(0, 2π),
         τ = Uniform(0, 1)
@@ -54,24 +55,28 @@ using DirectDetections, Distributions
 @named cEri = System(
     Priors(
         plx = gaia_plx(gaia_id=3205095125321700480),
-        μ   = TruncatedNormal(1.75, 0.05, 0, Inf),
+        M   = TruncatedNormal(1.75, 0.05, 0, Inf),
     ),
     b
 )
 
 ## Fit 
 # This could take ~5 minutes.
-chains = DirectDetections.hmc(
+Random.seed!(9876543210)
+@time chains = DirectDetections.hmc(
     cEri, 0.95,
-    adaptation=  1000,
-    iterations= 5_000,
+    # adaptation=  1000,
+    # iterations= 5_000,
+    
+    adaptation=  50,
+    iterations= 50,
     tree_depth=    13,
 )
 # You can also run multiple chains in parallel - let us know and we can help you
 # set that up.
 
 ## View summary of results
-display(chains)
+# display(chains)
 
 ## Plot fitted model (will take ~1 minute the first time), coloured by ecentricity.
 # This is similar to figure 4.

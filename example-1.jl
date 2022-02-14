@@ -66,8 +66,8 @@ using DirectDetections, Distributions
         # Replace this ID with the GAIA EDR3 identifier for 51 Eri (aka cEri).
         # You can find it on SIMBAD: http://simbad.u-strasbg.fr/simbad/sim-id?Ident=51+Eri
         plx = gaia_plx(gaia_id=00000000),
-        # μ represents the total system mass in solar masses. You can find an accepted value and uncertainty in the paper.
-        μ   = TruncatedNormal(1.0, 0.5, 0, Inf),
+        # M represents the total system mass in solar masses. You can find an accepted value and uncertainty in the paper.
+        M   = TruncatedNormal(1.0, 0.5, 0, Inf),
     ),
     # And here we list our planets:
     b
